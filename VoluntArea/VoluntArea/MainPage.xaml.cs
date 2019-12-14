@@ -12,6 +12,37 @@ namespace VoluntArea
         public MainPage()
         {
             InitializeComponent();
+            LogInPage();
+        }
+
+        public void MainWindow()
+        {
+            Clear();
+            CentralWindow.Children.Add(new Label { Text = "Здесь будет главная страница" });
+        }
+
+        private StackLayout CreateNewSrack(int row, string textForLabel, Entry entry)
+        {
+            StackLayout stLog = new StackLayout { Orientation = StackOrientation.Horizontal };
+            if (row != -1)
+            {
+                Grid.SetColumn(stLog, 1);
+                Grid.SetRow(stLog, row);
+            }
+            stLog.Children.Add(new Label
+            {
+                Text = textForLabel,
+                FontAttributes = FontAttributes.Bold,
+                VerticalOptions = LayoutOptions.Center
+            });
+            stLog.Children.Add(entry);
+            return stLog;
+        }
+
+        //Очистка главного окна от содержимого
+        public void Clear()
+        {
+            CentralWindow.Children.Clear();
         }
     }
 }
