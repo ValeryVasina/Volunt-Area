@@ -15,12 +15,6 @@ namespace VoluntArea
             LogInPage();
         }
 
-        public void MainWindow()
-        {
-            Clear();
-            CentralWindow.Children.Add(new Label { Text = "Здесь будет главная страница" });
-        }
-
         private StackLayout CreateNewSrack(int row, string textForLabel, Entry entry)
         {
             StackLayout stLog = new StackLayout { Orientation = StackOrientation.Horizontal };

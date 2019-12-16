@@ -22,6 +22,7 @@ namespace VoluntArea
                 FontSize = 45,
                 BackgroundColor = StyleColor.color1,
                 VerticalTextAlignment = TextAlignment.Center,
+
                 HeightRequest = 150
             });
 
@@ -49,7 +50,7 @@ namespace VoluntArea
                 Text = "Персональные данные"
             });
 
-            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Логин", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand}));
+            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Логин", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Повторите Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(new Label

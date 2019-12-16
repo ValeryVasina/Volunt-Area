@@ -9,12 +9,12 @@ namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
-       //страница входа
-       private void LogInPage()
-       {
+        //страница входа
+        private void LogInPage()
+        {
             Clear();
             CentralWindow.BackgroundColor = Color.White;
-      
+
             Frame frame = new Frame
             {
                 CornerRadius = 20,
@@ -25,7 +25,7 @@ namespace VoluntArea
 
             StackLayout stack = new StackLayout
             {
-               Orientation = StackOrientation.Vertical
+                Orientation = StackOrientation.Vertical
             };
 
             CentralWindow.Children.Add(stack);
@@ -47,13 +47,13 @@ namespace VoluntArea
                 }
             });
 
-           StackLayout stEnt = new StackLayout
-           {
+            StackLayout stEnt = new StackLayout
+            {
                 Orientation = StackOrientation.Vertical,
                 HorizontalOptions = LayoutOptions.Fill
-           };
+            };
 
-           frame.Content = stEnt;
+            frame.Content = stEnt;
 
             stack.Children.Add(frame);
             stEnt.Children.Add(new Label
@@ -64,7 +64,7 @@ namespace VoluntArea
                 FontSize = 25,
                 FontAttributes = FontAttributes.Bold
             });
-            stEnt.Children.Add(CreateNewSrack(-1, "Логин", new Entry {HorizontalOptions = LayoutOptions.FillAndExpand }));
+            stEnt.Children.Add(CreateNewSrack(-1, "Логин", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stEnt.Children.Add(CreateNewSrack(-1, "Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
 
             StackLayout butst = new StackLayout
@@ -103,9 +103,9 @@ namespace VoluntArea
 
             Button entBut = new Button
             {
-               Text = "Войти",
-               HorizontalOptions = LayoutOptions.Center,
-               BackgroundColor = StyleColor.color2
+                Text = "Войти",
+                HorizontalOptions = LayoutOptions.Center,
+                BackgroundColor = StyleColor.color2
             };
 
             frameE.Content = entBut;
@@ -114,7 +114,7 @@ namespace VoluntArea
             entBut.Clicked += entButtonEvent;
             butst.Children.Add(frameR);
             butst.Children.Add(frameE);
-       }
+        }
 
 
         //Событие перехода на страницу регистрации
@@ -126,7 +126,7 @@ namespace VoluntArea
         //Событие входа
         private void entButtonEvent(object sender, EventArgs e)
         {
-            MainWindow();
+            CentralPage();
         }
     }
 }
