@@ -9,6 +9,10 @@ namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
+        //временные поля
+        private ColumnDefinition MenuColumn;
+        private StackLayout WorkPlace;
+
         private void CentralPage()
         {
             Clear();
@@ -54,8 +58,26 @@ namespace VoluntArea
         {
             Grid grid = new Grid
             {
-
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = Color.AliceBlue
             };
+
+            Grid.SetRow(grid, 1);
+
+            ColumnDefinitionCollection cd = grid.ColumnDefinitions;
+            MenuColumn = new ColumnDefinition
+            {
+                Width = new GridLength(0)
+            };
+            cd.Add(MenuColumn);
+            cd.Add(new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            });
+
+            grid.Children.Add(CreateMenuStack());
+
             return grid;
         }
         
@@ -67,6 +89,8 @@ namespace VoluntArea
                 Text = "M",
                 BackgroundColor = StyleColor.color2
             };
+
+            but.Clicked += clickMenuButton;
 
             stack.Children.Add(but);
 
@@ -85,9 +109,38 @@ namespace VoluntArea
             stack.Children.Add(but);
         }
 
+        private StackLayout CreateMenuStack()
+        {
+            StackLayout stack = new StackLayout
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = StyleColor.color1
+            };
+
+            stack.Children.Add(new Label
+            {
+                //Text = "ТУТ БУДЕТ МЕНЮ"
+            });
+            return stack;
+        }
+
         private void toPersonalAccount(object sender, EventArgs e)
         {
             PersonalAccountPage();
+        }
+
+        private void clickMenuButton(object sender, EventArgs e)
+        {
+            if (MenuColumn.Width.Value == 0)
+            {
+                MenuColumn.Width = new GridLength(200);
+            }
+            else
+            {
+                MenuColumn.Width = new GridLength(0);
+            }
+
         }
     }
 }
