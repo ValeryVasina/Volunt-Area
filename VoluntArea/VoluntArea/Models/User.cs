@@ -7,16 +7,20 @@ namespace VoluntArea
 {
     class User : IEntity
     {
+        public int UserId { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
 
-        //проверка на наличие имени
+        //проверка на наличие имени и возраста >= 16
         public bool IsValid()
         {
-            return string.IsNullOrWhiteSpace(Name);
+            DateTime nowDt = DateTime.Now;
+            TimeSpan userAge = nowDt - BirthDate;
+            double threshold = 16.0;
+            return string.IsNullOrWhiteSpace(Name)&&((userAge.TotalDays/365) >= threshold);
         }
     }
 }
