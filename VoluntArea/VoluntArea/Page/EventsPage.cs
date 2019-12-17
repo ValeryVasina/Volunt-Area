@@ -9,13 +9,12 @@ namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
-        private void PersonalAccountPage()
+        private void EventPage()
         {
             ClearWorkPlace();
-
             WorkPlace.Children.Add(new Label
             {
-                Text = "Личный кабинет"
+                Text = "Страница с мероприятиями"
             });
         }
     }

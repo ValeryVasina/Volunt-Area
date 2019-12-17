@@ -10,12 +10,19 @@ namespace VoluntArea
     public partial class MainPage : ContentPage
     {
         //временные поля
-        private ColumnDefinition MenuColumn;
-        private StackLayout WorkPlace;
+        private ColumnDefinition MenuColumn = new ColumnDefinition {Width = 0 };
+        private StackLayout WorkPlace = new StackLayout
+        {
+            VerticalOptions = LayoutOptions.FillAndExpand,
+            HorizontalOptions = LayoutOptions.FillAndExpand,
+            BackgroundColor = Color.White
+        };
 
         private void CentralPage()
         {
             Clear();
+            CloseMenu();
+            ClearWorkPlace();
 
             Grid centralGrid = new Grid
             {
@@ -54,22 +61,26 @@ namespace VoluntArea
             centralGrid.Children.Add(CreateGridWithMenu());
         }
 
+        private void MainMenu()
+        {
+            ClearWorkPlace();
+            WorkPlace.Children.Add(new Label
+            {
+                Text = "Здесь будет главное меню"
+            });
+        }
+
         private Grid CreateGridWithMenu()
         {
             Grid grid = new Grid
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
-                BackgroundColor = Color.AliceBlue
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
             };
 
             Grid.SetRow(grid, 1);
 
             ColumnDefinitionCollection cd = grid.ColumnDefinitions;
-            MenuColumn = new ColumnDefinition
-            {
-                Width = new GridLength(0)
-            };
             cd.Add(MenuColumn);
             cd.Add(new ColumnDefinition
             {
@@ -77,6 +88,10 @@ namespace VoluntArea
             });
 
             grid.Children.Add(CreateMenuStack());
+
+            Grid.SetColumn(WorkPlace, 1);
+
+            grid.Children.Add(WorkPlace);
 
             return grid;
         }
@@ -90,7 +105,7 @@ namespace VoluntArea
                 BackgroundColor = StyleColor.color2
             };
 
-            but.Clicked += clickMenuButton;
+            but.Clicked += ClickMenuButton;
 
             stack.Children.Add(but);
 
@@ -105,7 +120,7 @@ namespace VoluntArea
                 Text = "User",
                 BackgroundColor = StyleColor.color2
             };
-
+            but.Clicked += ClickPersonalAccount;
             stack.Children.Add(but);
         }
 
@@ -113,34 +128,82 @@ namespace VoluntArea
         {
             StackLayout stack = new StackLayout
             {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.Fill,
+                Orientation = StackOrientation.Vertical,
                 BackgroundColor = StyleColor.color1
             };
 
-            stack.Children.Add(new Label
+            Button button = new Button();
+            button.Text = "Главное меню";
+            button.Clicked += GoToCentral;
+            stack.Children.Add(button);
+            button = new Button
             {
-                //Text = "ТУТ БУДЕТ МЕНЮ"
-            });
+                Text = "Личный кабинет"
+            };
+            button.Clicked += ClickPersonalAccount;
+            stack.Children.Add(button);
+
+            button = new Button
+            {
+                Text = "Мероприятия"
+            };
+            button.Clicked += GoToEventPage;
+            stack.Children.Add(button);
+
+            button = new Button
+            {
+                Text = "Выйти"
+            };
+            button.Clicked += ClickExit;
+            stack.Children.Add(button);
             return stack;
         }
 
-        private void toPersonalAccount(object sender, EventArgs e)
+        private void ClickPersonalAccount(object sender, EventArgs e)
         {
             PersonalAccountPage();
+            CloseMenu();
         }
 
-        private void clickMenuButton(object sender, EventArgs e)
+        private void ClickMenuButton(object sender, EventArgs e)
         {
             if (MenuColumn.Width.Value == 0)
             {
-                MenuColumn.Width = new GridLength(200);
+                MenuColumn.Width = 200;
             }
             else
             {
-                MenuColumn.Width = new GridLength(0);
+                MenuColumn.Width = 0;
             }
 
+        }
+
+        private void GoToCentral(object sender, EventArgs e)
+        {
+            MainMenu();
+            CloseMenu();
+        }
+
+        private void GoToEventPage(object sender, EventArgs e)
+        {
+            EventPage();
+            CloseMenu();
+        }
+
+        private void ClearWorkPlace()
+        {
+            WorkPlace.Children.Clear();
+        }
+
+        private void ClickExit(object sender, EventArgs e)
+        {
+            LogInPage();
+        }
+
+        private void CloseMenu()
+        {
+            MenuColumn.Width = 0;
         }
     }
 }
