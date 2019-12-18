@@ -110,21 +110,21 @@ namespace VoluntArea
 
             frameE.Content = entBut;
 
-            regBut.Clicked += regButtonEvent;
-            entBut.Clicked += entButtonEvent;
+            regBut.Clicked += RegButtonEvent;
+            entBut.Clicked += EntButtonEvent;
             butst.Children.Add(frameR);
             butst.Children.Add(frameE);
         }
 
 
         //Событие перехода на страницу регистрации
-        private void regButtonEvent(object sender, EventArgs e)
+        private void RegButtonEvent(object sender, EventArgs e)
         {
             RegistrationPage();
         }
 
         //Событие входа
-        private void entButtonEvent(object sender, EventArgs e)
+        private void EntButtonEvent(object sender, EventArgs e)
         {
             CentralPage();
         }

@@ -176,7 +176,6 @@ namespace VoluntArea
             {
                 MenuColumn.Width = 0;
             }
-
         }
 
         private void GoToCentral(object sender, EventArgs e)
