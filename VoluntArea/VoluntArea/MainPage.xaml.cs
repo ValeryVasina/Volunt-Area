@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VoluntArea.Interfaces;
 using Xamarin.Forms;
 
 namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
+        IRepository<Event> eventsRepository = Factory.Instance.GetEvent();
+        IRepository<User> usersRepository = Factory.Instance.GetUsers();
+
         public MainPage()
         {
             InitializeComponent();
