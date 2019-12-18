@@ -5,7 +5,7 @@ using VoluntArea.Interfaces;
 
 namespace VoluntArea
 {
-    class Events : IEntity
+    public class Event : IEntity
     {
         public int EventId { get; set; }
         public string EventName { get; set; }
