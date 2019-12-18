@@ -25,9 +25,16 @@ namespace VoluntArea.Storage
             }
         }
 
-        public void SaveData(string _fileName)
+        public void SaveData<N>(string _fileName, N data)
         {
-            throw new NotImplementedException();
+            using (var sw = new StreamWriter(_fileName))
+            {
+                using (var jsonWriter = new JsonTextWriter(sw))
+                {
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(jsonWriter, data);
+                }
+            }
         }
     }
 }

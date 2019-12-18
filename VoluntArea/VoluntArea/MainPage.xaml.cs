@@ -10,9 +10,7 @@ namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
-        IRepository<Event> eventsRepository = Factory.Instance.GetEvent();
-        IRepository<User> usersRepository = Factory.Instance.GetUsers();
-
+        VolunteerManager manager = new VolunteerManager();
         public MainPage()
         {
             InitializeComponent();

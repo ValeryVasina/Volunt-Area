@@ -7,7 +7,7 @@ namespace VoluntArea.Interfaces
 {
     public interface IFileRepository<T>: IRepository<T>
     {
-        void SaveData(string _fileName);
+        void SaveData<N>(string _fileName, N data);
         void ReadData(string _fileName);
     }
 }
