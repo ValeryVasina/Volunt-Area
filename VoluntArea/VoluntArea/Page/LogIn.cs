@@ -126,7 +126,10 @@ namespace VoluntArea
         //Событие входа
         private void EntButtonEvent(object sender, EventArgs e)
         {
-            CentralPage();
+            Entry login = (Entry)((StackLayout)(((StackLayout)(((StackLayout)(((Frame)((Button)sender).Parent).Parent)).Parent)).Children[1])).Children[1];
+            Entry password = (Entry)((StackLayout)(((StackLayout)(((StackLayout)(((Frame)((Button)sender).Parent).Parent)).Parent)).Children[1])).Children[1];
+
+            CentralPage(); //этот метод должен вызваться при правильных данных
         }
     }
 }
