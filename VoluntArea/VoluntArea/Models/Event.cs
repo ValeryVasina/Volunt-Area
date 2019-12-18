@@ -11,7 +11,8 @@ namespace VoluntArea
         public string EventName { get; set; }
         public DateTime EventDt { get; set; }
         public User Planner { get; set; }
-        public string Location { get; set; }
+        public string Town { get; set; }
+        public string Address { get; set; }
         public TimeSpan Duration { get; set; }
         public int RequiredPeopleNumber { get; set; }
         public string Description { get; set; }
