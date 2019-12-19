@@ -13,9 +13,10 @@ namespace VoluntArea
         IRepository<Event> eventsRepository = Factory.Instance.GetEvent();
         IRepository<User> usersRepository = Factory.Instance.GetUsers();
 
+        
         public User CheckUser(string login, string password)
         {
-            return usersRepository.Items.FirstOrDefault(u => u.Login == login && u.Password == u.Password);
+            return usersRepository.Items.FirstOrDefault(u => (u.Login == login || u.PhoneNumber == login) && u.Password == u.Password);
         }
         
         public bool CheckUserUnfo(string login, string userName, DateTime birthDt, string password,string email, string phoneNumber)
@@ -59,5 +60,6 @@ namespace VoluntArea
             catch (ArgumentNullException) { return false; }
         }
         public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
+
     }
 }
