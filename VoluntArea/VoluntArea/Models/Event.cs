@@ -27,12 +27,13 @@ namespace VoluntArea
         public int RequiredPeopleNumber { get; set; }
         public string Description { get; set; }
         public List<User> Volunteers { get; set; }
-        //public int PeopleSignedUp { get; set; }
+        public int PeopleSignedUp { get; set; }
         //проверяем на соответствие "валидности" - непустое имя, положительное кол-во человек, дата позже сейчас
         public bool IsValid()
         {
             DateTime nowDt = DateTime.Now;
-            return !string.IsNullOrWhiteSpace(EventName)||(RequiredPeopleNumber <= 0)||(EventDt.CompareTo(nowDt) < 0);
+            return !string.IsNullOrWhiteSpace(EventName)||(RequiredPeopleNumber <= 0)||(EventDt.CompareTo(nowDt) < 0)
+                ||string.IsNullOrWhiteSpace(Town)||string.IsNullOrWhiteSpace(Address)||string.IsNullOrWhiteSpace(Description);
         }
     }
 }

@@ -157,18 +157,33 @@ namespace VoluntArea
             return frame;
         }
 
-        private void EndOfCreateNewEvent(object sender, EventArgs e) //сюда нужно дабовить проверки
+        private void EndOfCreateNewEvent(object sender, EventArgs e)
         {
             Entry name = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[1]).Children[1];
             Entry Date = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[2]).Children[1];
             Entry town = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[3]).Children[1];
-            Entry adress = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[4]).Children[1];
+            Entry address = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[4]).Children[1];
             Entry type = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[5]).Children[1]; //пока вводим руками потом сделаю выпадающий список
             Entry duration = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[6]).Children[1];
             Entry countplace = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[7]).Children[1];
             Entry description = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[8]).Children[1];
 
-            RemoveLastWorkPlaceChild(); //метод вызываемый после соханений данных
+            if(manager.CheckDates(Date.Text) != null
+                && manager.CheckDurationForEvent(duration.Text) && manager.CheckPeopleNumber(countplace.Text))
+            {
+                DateTime eventDate = manager.CheckDates(Date.Text) ?? DateTime.Now;
+                int correctDuration = Int32.Parse(duration.Text);
+                int correctPeopleNumber = Int32.Parse(countplace.Text);
+                if(manager.CheckEventInfoAndAdd(CurrentUser, name.Text,town.Text, address.Text, eventDate, correctDuration,
+                    correctPeopleNumber, description.Text))
+                {
+                    // не прописан type 
+                    RemoveLastWorkPlaceChild(); //метод вызываемый после соханений данных
+                }
+                
+                //сообщение об ошибке
+            }
+            // сообщение об ошибке
         }
     }
 }

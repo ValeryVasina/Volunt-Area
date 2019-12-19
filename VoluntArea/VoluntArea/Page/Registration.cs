@@ -94,7 +94,7 @@ namespace VoluntArea
                 && manager.CheckDates(birthDt.Text) != null)
             {
                 DateTime correctBirthDate = manager.CheckDates(birthDt.Text) ?? DateTime.Now;
-                if(manager.CheckUserUnfo(login.Text, name.Text, correctBirthDate, password1.Text, email.Text, phoneNumber.Text))
+                if(manager.CheckUserInfoAndAdd(login.Text, name.Text, correctBirthDate, password1.Text, email.Text, phoneNumber.Text))
                 {
                     // нужно сообщение, что успешно зарегались
                     LogInPage();
