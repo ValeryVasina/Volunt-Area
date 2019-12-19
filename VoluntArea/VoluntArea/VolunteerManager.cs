@@ -13,7 +13,6 @@ namespace VoluntArea
         IRepository<Event> eventsRepository = Factory.Instance.GetEvent();
         IRepository<User> usersRepository = Factory.Instance.GetUsers();
 
-        
         public User CheckUser(string login, string password)
         {
             return usersRepository.Items.FirstOrDefault(u => (u.Login == login || u.PhoneNumber == login) && u.Password == u.Password);

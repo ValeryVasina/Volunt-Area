@@ -13,7 +13,7 @@ namespace VoluntArea
         {
             ClearWorkPlace();
 
-            WorkPlace.Children.Add(CreateVoluentCard());
+            WorkPlace.Children.Add(CreateVoluentCard(CurrentUser));
 
             WorkPlace.Children.Add(CreateRedLine());
 
@@ -30,7 +30,7 @@ namespace VoluntArea
             WorkPlace.Children.Add(CreateRedLine());
         }
 
-        private Frame CreateVoluentCard()
+        private Frame CreateVoluentCard(User CurrentUser)
         {
             Frame frame = new Frame
             {
@@ -74,7 +74,7 @@ namespace VoluntArea
                         },
                         new Label
                         {
-                            Text = "Рейтинг: "  
+                            Text = "Рейтинг: "
                         },
                         new Label
                         {
@@ -83,8 +83,7 @@ namespace VoluntArea
                     }
                 }
             };
-
-            return frame; 
+            return frame;
         }
 
         private StackLayout CreateButtonPanelInPA()

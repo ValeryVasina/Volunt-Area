@@ -16,7 +16,42 @@ namespace VoluntArea
         public MainPage()
         {
             InitializeComponent();
+
             LogInPage();
+        }
+
+        //Очистка главного окна от содержимого
+        public void Clear()
+        {
+            CentralWindow.Children.Clear();
+        }
+
+        public static Label CreateRedLine()
+        {
+            return new Label
+            {
+                HeightRequest = 5,
+                HorizontalOptions = LayoutOptions.Fill,
+                BackgroundColor = Color.Red
+            };
+        }
+
+        private Button CreateButtonForStack(string text)
+        {
+            Button button = new Button
+            {
+                Text = text,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = StyleColor.color5
+            };
+            return button;
+        }
+
+        private void RemoveLastWorkPlaceChild()
+        {
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
         }
 
         private StackLayout CreateNewSrack(int row, string textForLabel, Entry entry)
@@ -37,13 +72,7 @@ namespace VoluntArea
             return stLog;
         }
 
-        //Очистка главного окна от содержимого
-        public void Clear()
-        {
-            CentralWindow.Children.Clear();
-        }
-
-        private Label CreateTitePage(string title, int size)
+        private Label CreateTiteForPage(string title, int size)
         {
             return new Label
             {
@@ -54,31 +83,74 @@ namespace VoluntArea
             };
         }
 
-        private Label CreateRedLine()
+        private Frame FormForEvent(Event ev)
         {
-            return new Label
+            Frame frame = new Frame
             {
-                HeightRequest = 5,
-                HorizontalOptions = LayoutOptions.Fill,
-                BackgroundColor = Color.Red
-            };
-        }
-
-        private Button CreateButtonForStack(string text)
-        {
-            Button button = new Button
-            {
-                Text = text,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                BackgroundColor = StyleColor.color5
+                CornerRadius = 20,
+                HasShadow = true,
+                Margin = new Thickness(30, 40, 30, 30),
+                BackgroundColor = StyleColor.color3
             };
 
-            return button;
-        }
+            StackLayout stackOfCreForm = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                Padding = 5,
+                Children =
+                {
+                    new Label
+                    {
+                        Text = ev.EventId.ToString()
+                    },
+                    new Label
+                    {
+                        Text = ev.EventName
+                    },
+                    new Label
+                    {
+                        Text = ev.EventDt.ToString()
+                    },
+                    new Label
+                    {
+                        Text = ev.Planner.Name
+                    },
+                    new Label
+                    {
+                        Text = ev.Town
+                    },
+                    new Label
+                    {
+                        Text = ev.Address
+                    },
+                    new Label
+                    {
+                        Text = ev.Type.ToString()
+                    },
+                    new Label
+                    {
+                        Text = ev.DurationHours.ToString()
+                    },
+                    new Label
+                    {
+                        Text = ev.RequiredPeopleNumber.ToString()
+                    },
+                    new Label
+                    {
+                        Text = ev.Description
+                    },
+                    new Label
+                    {
+                        Text = ev.Volunteers.Count.ToString()
+                    },
+                }
+            };
 
-        private void RemoveLastWorkPlaceChild()
-        {
-            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+            frame.Content = stackOfCreForm;
+
+
+
+            return frame;
         }
     }
 }

@@ -68,6 +68,7 @@ namespace VoluntArea
             {
                 Text = "Здесь будет главное меню"
             });
+            
         }
 
         private Grid CreateGridWithMenu()
