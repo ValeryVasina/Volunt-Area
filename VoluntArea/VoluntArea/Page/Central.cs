@@ -117,7 +117,7 @@ namespace VoluntArea
 
             but = new Button
             {
-                Text = "User",
+                Text = CurrentUser.Name.Split(' ')[0],
                 BackgroundColor = StyleColor.color2
             };
             but.Clicked += ClickPersonalAccount;

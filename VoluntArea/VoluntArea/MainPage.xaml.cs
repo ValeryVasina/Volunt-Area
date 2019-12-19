@@ -10,7 +10,9 @@ namespace VoluntArea
 {
     public partial class MainPage : ContentPage
     {
+        private User CurrentUser;
         VolunteerManager manager = new VolunteerManager();
+
         public MainPage()
         {
             InitializeComponent();
