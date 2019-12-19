@@ -60,6 +60,21 @@ namespace VoluntArea
             catch (ArgumentNullException) { return false; }
         }
         public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
-
+        
+        // тестовые метод для добавления организаторов мероприятиям 
+        public void AddPlannerToExisting()
+        {
+            eventsRepository.Items.First().Planner = usersRepository.Items.First();
+            eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
+            eventsRepository.Items.Last().Planner = usersRepository.Items.First();
+            eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+        }
+        
+        public List<Event> GetEventsForUserAsPlanner(User user)
+        {
+            List<Event> nullEventList = new List<Event>(); 
+            //если мероприятий от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
+            return eventsRepository.Items.Where(e => e.Planner == user).ToList() ?? nullEventList;
+        }
     }
 }
