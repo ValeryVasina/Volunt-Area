@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using VoluntArea.Interfaces;
 using VoluntArea.Storage;
+using System.IO;
+using Xamarin.Forms;
+
 
 namespace VoluntArea
 {
@@ -12,6 +15,8 @@ namespace VoluntArea
         private static Factory instance;
         private Factory() { }
         public static Factory Instance => instance ?? (instance = new Factory());
+
+        
 
         private const string eventFile = "Data/Events.json";
         private const string userFile = "Data/Users.json";

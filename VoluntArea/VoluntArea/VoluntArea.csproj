@@ -22,4 +22,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadXFormsNugetUpgradeInfoBarVoluntAreaHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>
