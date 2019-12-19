@@ -12,10 +12,20 @@ namespace VoluntArea
     {
         IRepository<Event> eventsRepository = Factory.Instance.GetEvent();
         IRepository<User> usersRepository = Factory.Instance.GetUsers();
+        public List<Event> activeEvents = new List<Event>();
+        DateTime now = DateTime.Now;
+
+        public VolunteerManager()
+        {
+            GetActiveEvents();
+            AddPlannerToExistingEvents();
+        }
+
+        public void GetActiveEvents(){activeEvents = eventsRepository.Items.Where(e => e.EventDt > now).ToList();}
 
         public User CheckUser(string login, string password)
         {
-            return usersRepository.Items.FirstOrDefault(u => (u.Login == login || u.PhoneNumber == login) && u.Password == u.Password);
+            return usersRepository.Items.FirstOrDefault(u => (u.Login == login || u.PhoneNumber == login) && u.Password == password);
         }
         
         public bool CheckUserUnfo(string login, string userName, DateTime birthDt, string password,string email, string phoneNumber)
@@ -61,7 +71,7 @@ namespace VoluntArea
         public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
         
         // тестовые метод для добавления организаторов мероприятиям 
-        public void AddPlannerToExisting()
+        public void AddPlannerToExistingEvents()
         {
             eventsRepository.Items.First().Planner = usersRepository.Items.First();
             eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
@@ -75,5 +85,11 @@ namespace VoluntArea
             //если мероприятий от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
             return eventsRepository.Items.Where(e => e.Planner == user).ToList() ?? nullEventList;
         }
+        //public void ChangeRatingForUsers()
+        //{
+        //    List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList();
+        //    newPastEvents.Where(e => e.Volunteers != null);
+        //}
+
     }
 }

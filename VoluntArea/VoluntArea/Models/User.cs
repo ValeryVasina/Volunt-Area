@@ -14,7 +14,6 @@ namespace VoluntArea
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
-        public List<Event> Events { get; set; }
         public int Rating { get; set; }
 
         //проверка на наличие имени и возраста >= 16
