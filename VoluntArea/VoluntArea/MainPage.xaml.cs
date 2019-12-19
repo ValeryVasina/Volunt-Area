@@ -42,5 +42,43 @@ namespace VoluntArea
         {
             CentralWindow.Children.Clear();
         }
+
+        private Label CreateTitePage(string title, int size)
+        {
+            return new Label
+            {
+                Text = title,
+                FontSize = size,
+                HorizontalOptions = LayoutOptions.Fill,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
+        }
+
+        private Label CreateRedLine()
+        {
+            return new Label
+            {
+                HeightRequest = 5,
+                HorizontalOptions = LayoutOptions.Fill,
+                BackgroundColor = Color.Red
+            };
+        }
+
+        private Button CreateButtonForStack(string text)
+        {
+            Button button = new Button
+            {
+                Text = text,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = StyleColor.color5
+            };
+
+            return button;
+        }
+
+        private void RemoveLastWorkPlaceChild()
+        {
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+        }
     }
 }

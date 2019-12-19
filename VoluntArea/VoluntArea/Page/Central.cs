@@ -89,9 +89,14 @@ namespace VoluntArea
 
             grid.Children.Add(CreateMenuStack());
 
-            Grid.SetColumn(WorkPlace, 1);
+            ScrollView scroll = new ScrollView
+            {
+                Content = WorkPlace
+            };
 
-            grid.Children.Add(WorkPlace);
+            Grid.SetColumn(scroll, 1);
+
+            grid.Children.Add(scroll);
 
             return grid;
         }
@@ -159,6 +164,13 @@ namespace VoluntArea
 
             button = new Button
             {
+                Text = "Организатор"
+            };
+            button.Clicked += GoToOrganizerPage;
+            stack.Children.Add(button);
+
+            button = new Button
+            {
                 Text = "Выйти"
             };
             button.Clicked += ClickExit;
@@ -193,6 +205,12 @@ namespace VoluntArea
         private void GoToEventPage(object sender, EventArgs e)
         {
             EventPage();
+            CloseMenu();
+        }
+
+        private void GoToOrganizerPage(object sender, EventArgs e)
+        {
+            OrganizerPage();
             CloseMenu();
         }
 

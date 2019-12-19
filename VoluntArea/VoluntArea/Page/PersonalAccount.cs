@@ -14,6 +14,20 @@ namespace VoluntArea
             ClearWorkPlace();
 
             WorkPlace.Children.Add(CreateVoluentCard());
+
+            WorkPlace.Children.Add(CreateRedLine());
+
+            WorkPlace.Children.Add(new Label
+            {
+                Text = "Мои мероприятия",
+                HorizontalOptions = LayoutOptions.Fill,
+                FontSize = 40,
+                HorizontalTextAlignment = TextAlignment.Center
+            });
+
+            WorkPlace.Children.Add(CreateButtonPanelInPA());
+
+            WorkPlace.Children.Add(CreateRedLine());
         }
 
         private Frame CreateVoluentCard()
@@ -44,7 +58,7 @@ namespace VoluntArea
                         },
                         new Label
                         {
-                            Text = "Имя: " + CurrentUser.Name 
+                            Text = "Имя: " + CurrentUser.Name
                         },
                         new Label
                         {
@@ -52,7 +66,7 @@ namespace VoluntArea
                         },
                         new Label
                         {
-                            Text = "Дата рождения: " + CurrentUser.BirthDate.ToString() 
+                            Text = "Дата рождения: " + CurrentUser.BirthDate.ToString()
                         },
                         new Label
                         {
@@ -60,7 +74,7 @@ namespace VoluntArea
                         },
                         new Label
                         {
-                            Text = "Логин: " + CurrentUser.Login
+                            Text = "Рейтинг: "  
                         },
                         new Label
                         {
@@ -78,9 +92,19 @@ namespace VoluntArea
             StackLayout stack = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.Fill,
-                Margin = new Thickness(10)
+                Margin = new Thickness(0, 10, 0, 10),
+                Orientation = StackOrientation.Horizontal
+
             };
-            //Button 
+
+            Button button = CreateButtonForStack("Текущие");
+            stack.Children.Add(button);
+            button = CreateButtonForStack("Завершенные");
+            stack.Children.Add(button);
+            button = CreateButtonForStack("Организация");
+            button.Clicked += GoToOrganizerPage;
+            stack.Children.Add(button);
+            
             return stack;
         }
     }
