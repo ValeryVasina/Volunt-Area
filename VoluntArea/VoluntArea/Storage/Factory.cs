@@ -18,8 +18,8 @@ namespace VoluntArea
 
         
 
-        private const string eventFile = "Data/Events.json";
-        private const string userFile = "Data/Users.json";
+        private const string eventFile = "Data2/Events.json";
+        private const string userFile = "Data2/Users.json";
 
         // считываем данные с json файлов в списки
         private IRepository<Event> eventsRepository = new FileRepository<Event>(eventFile);
@@ -28,5 +28,6 @@ namespace VoluntArea
         //достаем списки
         public IRepository<Event> GetEvent() => eventsRepository;
         public IRepository<User> GetUsers() => usersRepository;
+
     }
 }
