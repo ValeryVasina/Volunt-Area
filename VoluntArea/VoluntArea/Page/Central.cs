@@ -111,12 +111,18 @@ namespace VoluntArea
 
             stack.Children.Add(new Label
             {
-                Text = "Voluent Area",
-                FontSize = 18
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
+                VerticalTextAlignment = TextAlignment.Center,
+                Text = "VoluntArea",
+                FontSize = 30
             });
 
             but = new Button
             {
+                CornerRadius = 10,
+                HorizontalOptions = LayoutOptions.End,
+                Margin = new Thickness(10),
                 Text = CurrentUser.Name.Split(' ')[0],
                 BackgroundColor = StyleColor.color2
             };

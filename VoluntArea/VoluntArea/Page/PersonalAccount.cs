@@ -38,23 +38,50 @@ namespace VoluntArea
                             HorizontalTextAlignment = TextAlignment.Center,
                             HorizontalOptions = LayoutOptions.Fill
                         },
-                        new Label
+                        new Image
                         {
-                            Text = "Имя  "
+                            Source = "ava.png", HeightRequest = 100, Margin = 5
                         },
                         new Label
                         {
-                            Text = "Фамилия"
+                            Text = "Имя: " + CurrentUser.Name 
                         },
                         new Label
                         {
-                            Text = "Другая инвормация"
-                        }
+                            Text = "Логин: " + CurrentUser.Login
+                        },
+                        new Label
+                        {
+                            Text = "Дата рождения: " + CurrentUser.BirthDate.ToString() 
+                        },
+                        new Label
+                        {
+                            Text = "Почта: " + CurrentUser.Email
+                        },
+                        new Label
+                        {
+                            Text = "Логин: " + CurrentUser.Login
+                        },
+                        new Label
+                        {
+                            Text = "Телефон: " + CurrentUser.PhoneNumber
+                        },
                     }
                 }
             };
 
             return frame; 
+        }
+
+        private StackLayout CreateButtonPanelInPA()
+        {
+            StackLayout stack = new StackLayout
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                Margin = new Thickness(10)
+            };
+            //Button 
+            return stack;
         }
     }
 }
