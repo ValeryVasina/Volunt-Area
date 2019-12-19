@@ -49,20 +49,21 @@ namespace VoluntArea
                 FontSize = 19,
                 Text = "Персональные данные"
             });
-
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Логин", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
+            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Имя пользователя", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
+            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Дата рождения", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Повторите Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
-            stackOfRegForm.Children.Add(new Label
-            {
-                TextDecorations = TextDecorations.Underline,
-                FontAttributes = FontAttributes.Bold,
-                FontSize = 19,
-                Text = "Контактная информация"
-            });
+            //stackOfRegForm.Children.Add(new Label
+            //{
+            //    TextDecorations = TextDecorations.Underline,
+            //    FontAttributes = FontAttributes.Bold,
+            //    FontSize = 19,
+            //    Text = "Контактная информация"
+            //});
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Телефон", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "E-mail", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
-            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Адрес", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
+            //stackOfRegForm.Children.Add(CreateNewSrack(-1, "Адрес", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
 
             Button button = new Button
             {
@@ -80,7 +81,27 @@ namespace VoluntArea
         //завершение реистрации 
         private void EndOfRegistrationEvent(object sender, EventArgs e)
         {
-            LogInPage();
+            Entry login = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[1]).Children[1];
+            Entry name = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[2]).Children[1];
+            Entry birthDt = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[3]).Children[1];
+            Entry password1 = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[4]).Children[1];
+            Entry password2 = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[5]).Children[1];
+            Entry phoneNumber = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[6]).Children[1];
+            Entry email = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[7]).Children[1];
+
+
+            if(manager.CheckPhoneNumberFormat(phoneNumber.Text)&& manager.CheckPassword(password1.Text,password2.Text)
+                && manager.CheckDates(birthDt.Text) != null)
+            {
+                DateTime correctBirthDate = manager.CheckDates(birthDt.Text) ?? DateTime.Now;
+                if(manager.CheckUserUnfo(login.Text, name.Text, correctBirthDate, password1.Text, email.Text, phoneNumber.Text))
+                {
+                    // нужно сообщение, что успешно зарегались
+                    LogInPage();
+                }
+                // сообщение об ошибке, если в условии выше false
+
+            }
         }
     }
 }

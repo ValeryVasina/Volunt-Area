@@ -10,6 +10,7 @@ namespace VoluntArea
         public int UserId { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
+        public string Login { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
@@ -20,7 +21,7 @@ namespace VoluntArea
             DateTime nowDt = DateTime.Now;
             TimeSpan userAge = nowDt - BirthDate;
             double threshold = 16.0;
-            return string.IsNullOrWhiteSpace(Name)&&((userAge.TotalDays/365) >= threshold);
+            return string.IsNullOrEmpty(Login)&&string.IsNullOrWhiteSpace(Name)&&((userAge.TotalDays/365) >= threshold);
         }
     }
 }

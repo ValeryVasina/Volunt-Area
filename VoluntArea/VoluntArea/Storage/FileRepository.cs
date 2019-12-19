@@ -22,7 +22,7 @@ namespace VoluntArea.Storage
                 using (var sw = new StreamWriter(GetPath("Data/Users.json")))
                 {
                     // ensure file is created
-                    sw.Write(@"[{""UserId"":1,""Name"":""Иван Иванов"",""BirthDate"":""1995/06/12"", ""Email"":""ivanivanov@mail.ru"",""PhoneNumber"":""+79101112233"",""Password"":""1111""},{""UserId"":2,""Name"":""Мария Сидорова"",""BirthDate"":""1994/07/02"", ""Email"":""msidorova@mail.ru"",""PhoneNumber"":""+79112223344"",""Password"":""0000""}]");
+                    sw.Write(@"[{""UserId"":1,""Name"":""Иван Иванов"",""Login"":""Ivan1000"",""BirthDate"":""1995/06/12"", ""Email"":""ivanivanov@mail.ru"",""PhoneNumber"":""+79101112233"",""Password"":""1111""},{""UserId"":2,""Name"":""Мария Сидорова"",""Login"":""Masha23"",""BirthDate"":""1994/07/02"", ""Email"":""msidorova@mail.ru"",""PhoneNumber"":""+79112223344"",""Password"":""0000""}]");
                 }
             if (!File.Exists(GetPath("Data/Events.json")))
                 using (var sw = new StreamWriter(GetPath("Data/Events.json")))

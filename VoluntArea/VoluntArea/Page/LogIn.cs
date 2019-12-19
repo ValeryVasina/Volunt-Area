@@ -128,7 +128,9 @@ namespace VoluntArea
         {
             Entry login = (Entry)((StackLayout)(((StackLayout)(((StackLayout)(((Frame)((Button)sender).Parent).Parent)).Parent)).Children[1])).Children[1];
             Entry password = (Entry)((StackLayout)(((StackLayout)(((StackLayout)(((Frame)((Button)sender).Parent).Parent)).Parent)).Children[2])).Children[1];
-            if (manager.CheckUser(login.Text, password.Text) != null)
+            if (login.Text == null || password.Text == null)
+                LogInPage();
+            else if(manager.CheckUser(login.Text, password.Text) != null)
                 CentralPage(); //этот метод должен вызваться при правильных данных
             else
                 LogInPage();
