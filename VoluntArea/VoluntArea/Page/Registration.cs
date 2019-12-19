@@ -53,7 +53,7 @@ namespace VoluntArea
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Имя пользователя", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Дата рождения", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
-            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Повторите Пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
+            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Повторите пароль", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             //stackOfRegForm.Children.Add(new Label
             //{
             //    TextDecorations = TextDecorations.Underline,
@@ -61,7 +61,7 @@ namespace VoluntArea
             //    FontSize = 19,
             //    Text = "Контактная информация"
             //});
-            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Телефон", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
+            stackOfRegForm.Children.Add(CreateNewSrack(-1, "Телефон (+7...)", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             stackOfRegForm.Children.Add(CreateNewSrack(-1, "E-mail", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
             //stackOfRegForm.Children.Add(CreateNewSrack(-1, "Адрес", new Entry { HorizontalOptions = LayoutOptions.FillAndExpand }));
 
@@ -78,7 +78,7 @@ namespace VoluntArea
             CentralWindow.Children.Add(frame);
         }
 
-        //завершение реистрации 
+        //завершение регистрации 
         private void EndOfRegistrationEvent(object sender, EventArgs e)
         {
             Entry login = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[1]).Children[1];
@@ -102,6 +102,8 @@ namespace VoluntArea
                 // сообщение об ошибке, если в условии выше false
 
             }
+
+            //здесь тоже сообщение об ошибке
         }
     }
 }

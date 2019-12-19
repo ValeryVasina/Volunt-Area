@@ -21,7 +21,7 @@ namespace VoluntArea
         public bool IsValid()
         {
             DateTime nowDt = DateTime.Now;
-            return string.IsNullOrWhiteSpace(EventName)&&(RequiredPeopleNumber > 0)&&(EventDt.CompareTo(nowDt) > 0);
+            return !string.IsNullOrWhiteSpace(EventName)||(RequiredPeopleNumber <= 0)||(EventDt.CompareTo(nowDt) < 0);
         }
     }
 }

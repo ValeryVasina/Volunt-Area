@@ -21,7 +21,8 @@ namespace VoluntArea
             DateTime nowDt = DateTime.Now;
             TimeSpan userAge = nowDt - BirthDate;
             double threshold = 16.0;
-            return string.IsNullOrEmpty(Login)&&string.IsNullOrWhiteSpace(Name)&&((userAge.TotalDays/365) >= threshold);
+            double age = userAge.TotalDays / 365.25;
+            return !string.IsNullOrWhiteSpace(Login)||string.IsNullOrWhiteSpace(Name)||string.IsNullOrWhiteSpace(Email)||(age <= threshold);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace VoluntArea
             {
                 User user = new User
                 {
+                    Login = login,
                     Name = userName,
                     BirthDate = birthDt,
                     Email = email,
@@ -57,6 +58,6 @@ namespace VoluntArea
             try{return Regex.IsMatch(phoneNumber, phoneFormat);}
             catch (ArgumentNullException) { return false; }
         }
-        public bool CheckPassword(string password1, string password2){return password1 == password2;}
+        public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
     }
 }
