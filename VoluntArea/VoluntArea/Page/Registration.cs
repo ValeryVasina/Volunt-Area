@@ -80,6 +80,7 @@ namespace VoluntArea
         //завершение реистрации 
         private void EndOfRegistrationEvent(object sender, EventArgs e)
         {
+            Entry login = (Entry)((StackLayout)((StackLayout)(((Button)sender).Parent)).Children[1]).Children[1];   
             LogInPage();
         }
     }
