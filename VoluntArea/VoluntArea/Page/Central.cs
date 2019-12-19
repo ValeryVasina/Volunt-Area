@@ -59,16 +59,16 @@ namespace VoluntArea
             centralGrid.Children.Add(topStack);
 
             centralGrid.Children.Add(CreateGridWithMenu());
+
+            MainMenu();
         }
 
         private void MainMenu()
         {
             ClearWorkPlace();
-            WorkPlace.Children.Add(new Label
-            {
-                Text = "Здесь будет главное меню"
-            });
-            
+           
+            foreach (Event ev in manager.activeEvents)
+               WorkPlace.Children.Add(FormForEvent(ev));
         }
 
         private Grid CreateGridWithMenu()

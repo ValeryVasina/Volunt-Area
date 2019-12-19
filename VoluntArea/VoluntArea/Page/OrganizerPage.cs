@@ -95,10 +95,17 @@ namespace VoluntArea
 
         private StackLayout CreateStackForOrgEvent()
         {
+
             StackLayout stack = new StackLayout
             {
-
+                HorizontalOptions = LayoutOptions.FillAndExpand    
             };
+            List<Event> list = manager.GetEventsForUserAsPlanner(CurrentUser);
+
+            foreach (Event ev in list)
+            {
+                stack.Children.Add(FormForEvent(ev));
+            }
 
             return stack;
         }

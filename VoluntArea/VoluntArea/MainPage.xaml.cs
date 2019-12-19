@@ -139,10 +139,6 @@ namespace VoluntArea
                     {
                         Text = ev.Description
                     },
-                    new Label
-                    {
-                        Text = ev.Volunteers.Count.ToString()
-                    },
                 }
             };
 
