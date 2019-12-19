@@ -40,7 +40,7 @@ namespace VoluntArea
                         },
                         new Label
                         {
-                            Text = "Имя"
+                            Text = "Имя  "
                         },
                         new Label
                         {
