@@ -109,7 +109,7 @@ namespace VoluntArea
                     },
                     new Label
                     {
-                        Text = ev.EventDt.ToString()
+                        Text = ev.EventDt.ToString().Split(' ')[0]
                     },
                     new Label
                     {
@@ -144,12 +144,7 @@ namespace VoluntArea
 
             frame.Content = stackOfCreForm;
 
-
-
             return frame;
-
-
-
         }
     }
 }

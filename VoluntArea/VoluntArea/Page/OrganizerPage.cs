@@ -188,6 +188,7 @@ namespace VoluntArea
                 //сообщение об ошибке
             }
             // сообщение об ошибке
+            RemoveLastWorkPlaceChild();
         }
     }
 }

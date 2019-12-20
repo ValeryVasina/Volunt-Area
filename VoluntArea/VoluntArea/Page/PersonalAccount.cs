@@ -28,6 +28,7 @@ namespace VoluntArea
             WorkPlace.Children.Add(CreateButtonPanelInPA());
 
             WorkPlace.Children.Add(CreateRedLine());
+            WorkPlace.Children.Add(new Label());
         }
 
         private Frame CreateVoluentCard(User CurrentUser)
@@ -97,8 +98,10 @@ namespace VoluntArea
             };
 
             Button button = CreateButtonForStack("Текущие");
+            button.Clicked += CurrentEventUser;
             stack.Children.Add(button);
             button = CreateButtonForStack("Завершенные");
+            button.Clicked += FinishEventUser;
             stack.Children.Add(button);
             button = CreateButtonForStack("Организация");
             button.Clicked += GoToOrganizerPage;
@@ -106,5 +109,40 @@ namespace VoluntArea
             
             return stack;
         }
+
+        private void CurrentEventUser(object sender, EventArgs e)
+        {
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+
+            StackLayout stack = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical
+            };
+
+            stack.Children.Add(CreateTiteForPage("Ваши текущие предстоящие мероприятия", 20));
+            List<Event> list = manager.GetActiveEventsForUserToAttend(CurrentUser);
+            foreach (Event ev in list)
+                stack.Children.Add(FormForEvent(ev));
+
+            WorkPlace.Children.Add(stack);
+        }
+
+        private void FinishEventUser(object sender, EventArgs e)
+        {
+            WorkPlace.Children.Remove(WorkPlace.Children[WorkPlace.Children.Count - 1]);
+
+            StackLayout stack = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical
+            };
+
+            stack.Children.Add(CreateTiteForPage("Ваши завершенные мероприятия", 20));
+            List<Event> list = manager.GetPastEventsForUser(CurrentUser);
+            foreach (Event ev in list)
+                stack.Children.Add(FormForEvent(ev));
+
+            WorkPlace.Children.Add(stack);
+        }
+    
     }
 }

@@ -145,12 +145,16 @@ namespace VoluntArea
                 BackgroundColor = StyleColor.color1
             };
 
-            Button button = new Button();
+            Button button = new Button
+            {
+                BackgroundColor = StyleColor.color1,
+            };
             button.Text = "Главное меню";
             button.Clicked += GoToCentral;
             stack.Children.Add(button);
             button = new Button
             {
+                BackgroundColor = StyleColor.color1,
                 Text = "Личный кабинет"
             };
             button.Clicked += ClickPersonalAccount;
@@ -158,6 +162,7 @@ namespace VoluntArea
 
             button = new Button
             {
+                BackgroundColor = StyleColor.color1,
                 Text = "Мероприятия"
             };
             button.Clicked += GoToEventPage;
@@ -165,6 +170,7 @@ namespace VoluntArea
 
             button = new Button
             {
+                BackgroundColor = StyleColor.color1,
                 Text = "Организатор"
             };
             button.Clicked += GoToOrganizerPage;
@@ -172,6 +178,7 @@ namespace VoluntArea
 
             button = new Button
             {
+                BackgroundColor = StyleColor.color1,
                 Text = "Выйти"
             };
             button.Clicked += ClickExit;
