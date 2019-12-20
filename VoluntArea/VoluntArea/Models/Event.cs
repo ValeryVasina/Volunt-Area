@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using VoluntArea.Interfaces;
+using VoluntArea.Models;
 
 namespace VoluntArea
 {
@@ -28,6 +29,7 @@ namespace VoluntArea
         public string Description { get; set; }
         public List<User> Volunteers { get; set; }
         public int PeopleSignedUp { get; set; }
+        public Rating Rating { get; set; }
         //проверяем на соответствие "валидности" - непустое имя, положительное кол-во человек, дата позже сейчас
         public bool IsValid()
         {

@@ -84,13 +84,17 @@ namespace VoluntArea
         private bool TryViewCurrentOrgEvent()
         {
             //нужно написать проверку есть ли органзуемые мероприятия
-            return false;
+
+            // возвращает тру, если ивенты для определенного юзера есть
+            return manager.GetActiveEventsForUserAsPlanner(CurrentUser).Count != 0;
+            
         }
 
         private bool TryCreateNewEvent()
         {
             //Надо проверить хватает рейтинга чтобы организовывать мероприятия
-            return true;
+
+            return CurrentUser.Rating.CheckUserRatingToPlan();
         }
 
         private StackLayout CreateStackForOrgEvent()
@@ -100,7 +104,7 @@ namespace VoluntArea
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand    
             };
-            List<Event> list = manager.GetEventsForUserAsPlanner(CurrentUser);
+            List<Event> list = manager.GetActiveEventsForUserAsPlanner(CurrentUser);
 
             foreach (Event ev in list)
             {

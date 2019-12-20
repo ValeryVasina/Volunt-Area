@@ -16,19 +16,20 @@ namespace VoluntArea.Storage
 
         static FileRepository()
         {
-            if (!Directory.Exists(GetPath("Data2")))
-                Directory.CreateDirectory(GetPath("Data2"));
-            if (!File.Exists(GetPath("Data2/Users.json")))
-                using (var sw = new StreamWriter(GetPath("Data2/Users.json")))
+            if (!Directory.Exists(GetPath("Data3")))
+                Directory.CreateDirectory(GetPath("Data3"));
+            if (!File.Exists(GetPath("Data3/Users.json")))
+                using (var sw = new StreamWriter(GetPath("Data3/Users.json")))
                 {
                     // ensure file is created
-                    sw.Write(@"[{""UserId"":1,""Name"":""Иван Иванов"",""Login"":""Ivan1000"",""BirthDate"":""1995/06/12"",""Email"":""ivanivanov@mail.ru"",""PhoneNumber"":""+79101112233"",""Password"":""1111"",""Rating"":8},{""UserId"":2,""Name"":""Мария Сидорова"",""Login"":""Masha23"",""BirthDate"":""1994/07/02"",""Email"":""msidorova@mail.ru"",""PhoneNumber"":""+79112223344"",""Password"":""0000"",""Rating"":3}]");
+                    sw.Write(@"[{""UserId"":1,""Name"":""Иван Иванов"",""Login"":""Ivan1000"",""BirthDate"":""1995/06/12"",""Email"":""ivanivanov@mail.ru"",""PhoneNumber"":""+79101112233"",""Password"":""1111"",""Rating.Value"":12},
+{""UserId"":2,""Name"":""Мария Сидорова"",""Login"":""Masha23"",""BirthDate"":""1994/07/02"",""Email"":""msidorova@mail.ru"",""PhoneNumber"":""+79112223344"",""Password"":""0000"",""Rating.Value"":3}]");
                 }
-            if (!File.Exists(GetPath("Data2/Events.json")))
-                using (var sw = new StreamWriter(GetPath("Data2/Events.json")))
+            if (!File.Exists(GetPath("Data3/Events.json")))
+                using (var sw = new StreamWriter(GetPath("Data3/Events.json")))
                 {
-                    sw.Write(@"[{""EventId"":1,""EventName"":""Открытие приюта 'Лучший друг'"",""EventDt"":""2020/01/17 20:00:00"",""EventType"": 4,""DurationHours"":3,""Town"":""Москва"",""Address"":""ул.Петрова д.5"",""RequiredPeopleNumber"":7,""Description"":""блабла""},
-{""EventId"":2,""EventName"":""Форум для врачей-кардиологов"",""EventDt"":""2020/01/23 17:00:00"",""DurationHours"":4,""EventType"": 4,""Town"":""Москва"",""Address"":""ул.Лизюкова д.31"",""RequiredPeopleNumber"":10,""Description"":""бла""}]");
+                    sw.Write(@"[{""EventId"":1,""EventName"":""Открытие приюта 'Лучший друг'"",""EventDt"":""2020/01/17 20:00:00"",""EventType"":4,""DurationHours"":3,""Town"":""Москва"",""Address"":""ул.Петрова д.5"",""RequiredPeopleNumber"":7,""Description"":""Ищем добрых людей"",""Rating.Value"":8},
+{""EventId"":2,""EventName"":""Форум для врачей-кардиологов"",""EventDt"":""2020/01/23 17:00:00"",""DurationHours"":4,""EventType"":5,""Town"":""Москва"",""Address"":""ул.Лизюкова д.31"",""RequiredPeopleNumber"":10,""Description"":""Вкусно покормим"",""Rating.Value"":5}]");
                 }
             
         }

@@ -14,13 +14,13 @@ namespace VoluntArea
         IRepository<User> usersRepository = Factory.Instance.GetUsers();
 
         public List<Event> activeEvents = new List<Event>();
-        DateTime now = DateTime.Now;
-        List<Event> nullEventList = new List<Event>();
+        readonly DateTime now = DateTime.Now;
+        readonly List<Event> nullEventList = new List<Event>();
 
         public VolunteerManager()
         {
             GetActiveEvents();
-            AddPlannerToExistingEvents();
+            //AddPlannerToExistingEvents();
             ChangeRatingForUsers();
         }
 
@@ -79,22 +79,16 @@ namespace VoluntArea
             eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
             eventsRepository.Items.Last().Planner = usersRepository.Items.First();
             eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+            usersRepository.Items.First().Rating.Value = 12;
+            usersRepository.Items.Last().Rating.Value = 3;
         }
         
-        public List<Event> GetEventsForUserAsPlanner(User user)
+        public List<Event> GetActiveEventsForUserAsPlanner(User user)
         {
             //если мероприятия от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
-            return eventsRepository.Items.Where(e => e.Planner == user).ToList() ?? nullEventList;
+            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > now).ToList() ?? nullEventList;
         }
-        public void ChangeRatingForUsers()
-        {
-            List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList()?? nullEventList;
 
-            foreach(var pastEvent in newPastEvents.Where(e => e.Volunteers != null))
-            {
-                pastEvent.Volunteers.ForEach(v => v.Rating += pastEvent.DurationHours);
-            }
-        }
         // устанавливаем границы для длительности мероприятия
         public bool CheckDurationForEvent(string hours)
         {
@@ -134,5 +128,15 @@ namespace VoluntArea
             }
             return false;
         }
+        public void ChangeRatingForUsers()
+        {
+            List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList() ?? nullEventList;
+
+            foreach (var pastEvent in newPastEvents.Where(e => e.Volunteers != null))
+            {
+                pastEvent.Volunteers.ForEach(v => v.Rating.Value += pastEvent.DurationHours);
+            }
+        }
+
     }
 }
