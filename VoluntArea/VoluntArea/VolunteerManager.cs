@@ -167,6 +167,7 @@ namespace VoluntArea
 
         public bool AddUserToEvent(User user, Event activeEvent)
         {
+            GetActiveEvents();
             if (activeEvent.Volunteers.Count < activeEvent.RequiredPeopleNumber && !activeEvent.Volunteers.Contains(user))
             {
                 activeEvent.Volunteers.Add(user);
