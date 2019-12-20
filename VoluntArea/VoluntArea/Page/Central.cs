@@ -71,7 +71,12 @@ namespace VoluntArea
             {
                 Source = "main.jpg"
             });
-
+            WorkPlace.Children.Add(new Label
+            {
+                BackgroundColor = StyleColor.color3,
+                FontSize = 22,
+                Text = "Чувствуй сердцем Думай головой. Стань волонтером, Все страхи долой!"
+            });
             WorkPlace.Children.Add(CreateTiteForPage("Ближайшие мероприятия", 35));
 
             foreach (Event ev in manager.activeEvents)
