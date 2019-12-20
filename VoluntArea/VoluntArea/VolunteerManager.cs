@@ -143,14 +143,13 @@ namespace VoluntArea
             }
             return false;
         }
+
+        //считаем рейтинг при входе в приложение или обновлении страницы
         public void ChangeRatingForUsers()
         {
             List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList() ?? emptyEventList;
 
-            foreach (var pastEvent in newPastEvents)
-            {
-                pastEvent.Volunteers.ForEach(v => v.Rating.Value += pastEvent.DurationHours);
-            }
+            newPastEvents.ForEach(e => e.Volunteers.ForEach(v => v.Rating.Value += e.DurationHours));
         }
 
         public bool AddUserToEvent(User user, Event activeEvent)
@@ -173,6 +172,15 @@ namespace VoluntArea
         {
             return eventsRepository.Items.Where(e => e.Volunteers.Contains(user) && e.EventDt < DateTime.Now).ToList() ?? emptyEventList;
         }
-
+        public void RemoveUserFromActiveEvent(User user, Event activeEvent)
+        {
+            activeEvent.Volunteers.Remove(user);
+        }
+        // делаем выборку по городу
+        public List<Event> GetEventsForTown(string town)
+        {
+            return eventsRepository.Items.Where(e => e.Town.ToLower() == town.ToLower()).ToList() ?? emptyEventList;
+        }
+        
     }
 }
