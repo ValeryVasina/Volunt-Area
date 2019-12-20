@@ -39,7 +39,7 @@ namespace VoluntArea
         private Button CreateButtonForStack(string text)
         {
             Button button = new Button
-            {
+            {         
                 Text = text,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = StyleColor.color5
