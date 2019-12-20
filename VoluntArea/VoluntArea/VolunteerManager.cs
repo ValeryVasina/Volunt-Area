@@ -20,7 +20,7 @@ namespace VoluntArea
         public VolunteerManager()
         {
             GetActiveEvents();
-            //AddPlannerToExistingEvents();
+            AddPlannerToExistingEvents();
             ChangeRatingForUsers();
         }
 
@@ -76,9 +76,9 @@ namespace VoluntArea
         public void AddPlannerToExistingEvents()
         {
             eventsRepository.Items.First().Planner = usersRepository.Items.First();
-            eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
+            //eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
             eventsRepository.Items.Last().Planner = usersRepository.Items.First();
-            eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+            //eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
             usersRepository.Items.First().Rating.Value = 12;
             usersRepository.Items.Last().Rating.Value = 3;
         }
