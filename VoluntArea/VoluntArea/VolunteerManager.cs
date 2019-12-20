@@ -15,7 +15,6 @@ namespace VoluntArea
         IRepository<User> usersRepository = Factory.Instance.GetUsers();
 
         public List<Event> activeEvents = new List<Event>();
-        readonly DateTime now = DateTime.Now;
         readonly List<Event> emptyEventList = new List<Event>();
 
         public VolunteerManager()
@@ -25,7 +24,7 @@ namespace VoluntArea
             ChangeRatingForUsers();
         }
 
-        public void GetActiveEvents(){activeEvents = eventsRepository.Items.Where(e => e.EventDt > now).ToList() ?? emptyEventList;}
+        public void GetActiveEvents(){activeEvents = eventsRepository.Items.Where(e => e.EventDt > DateTime.Now).ToList() ?? emptyEventList;}
 
         public User CheckUser(string login, string password)
         {
@@ -96,11 +95,11 @@ namespace VoluntArea
         public List<Event> GetActiveEventsForUserAsPlanner(User user)
         {
             //если мероприятия от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
-            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > now).ToList() ?? emptyEventList;
+            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > DateTime.Now).ToList() ?? emptyEventList;
         }
         public List<Event> GetPastEventsForUserAsPlanner(User user)
         {
-            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt < now).ToList() ?? emptyEventList;
+            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt < DateTime.Now).ToList() ?? emptyEventList;
         }
 
         // устанавливаем границы для длительности мероприятия
@@ -132,7 +131,8 @@ namespace VoluntArea
                 Description = description,
                 DurationHours = duration,
                 RequiredPeopleNumber = peopleNumber,
-                Rating = new Rating()
+                Rating = new Rating(),
+                Volunteers = new List<User>()
             };
             if(newEvent.IsValid())
             {
@@ -147,11 +147,20 @@ namespace VoluntArea
         {
             List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList() ?? emptyEventList;
 
-            foreach (var pastEvent in newPastEvents.Where(e => e.Volunteers != null))
+            foreach (var pastEvent in newPastEvents)
             {
                 pastEvent.Volunteers.ForEach(v => v.Rating.Value += pastEvent.DurationHours);
             }
         }
-
+        //вытаскиваем текущие ивенты для юзера, которые он собирается посетить
+        public List<Event> GetActiveEventsForUserToAttend(User user)
+        {
+            return eventsRepository.Items.Where(e => e.Volunteers.Contains(user) && e.EventDt > DateTime.Now).ToList() ?? emptyEventList;
+        }
+        //вытаскиваем прошедшие ивенты для юзера
+        public List<Event> GetPastEventsForUser(User user)
+        {
+            return eventsRepository.Items.Where(e => e.Volunteers.Contains(user) && e.EventDt < DateTime.Now).ToList() ?? emptyEventList;
+        }
     }
 }
