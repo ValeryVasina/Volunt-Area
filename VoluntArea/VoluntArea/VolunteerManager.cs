@@ -5,6 +5,7 @@ using VoluntArea.Interfaces;
 using Xamarin.Forms;
 using System.Linq;
 using System.Text.RegularExpressions;
+using VoluntArea.Models;
 
 namespace VoluntArea
 {
@@ -15,16 +16,16 @@ namespace VoluntArea
 
         public List<Event> activeEvents = new List<Event>();
         readonly DateTime now = DateTime.Now;
-        readonly List<Event> nullEventList = new List<Event>();
+        readonly List<Event> emptyEventList = new List<Event>();
 
         public VolunteerManager()
         {
-            GetActiveEvents();
             AddPlannerToExistingEvents();
+            GetActiveEvents();
             ChangeRatingForUsers();
         }
 
-        public void GetActiveEvents(){activeEvents = eventsRepository.Items.Where(e => e.EventDt > now).ToList();}
+        public void GetActiveEvents(){activeEvents = eventsRepository.Items.Where(e => e.EventDt > now).ToList() ?? emptyEventList;}
 
         public User CheckUser(string login, string password)
         {
@@ -42,7 +43,8 @@ namespace VoluntArea
                     BirthDate = birthDt,
                     Email = email,
                     PhoneNumber = phoneNumber,
-                    Password = password
+                    Password = password,
+                    Rating = new Rating()
                 };
                 if(user.IsValid())
                 {
@@ -71,22 +73,34 @@ namespace VoluntArea
             catch (ArgumentNullException) { return false; }
         }
         public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
-        
+
         // тестовый метод для добавления организаторов мероприятиям 
         public void AddPlannerToExistingEvents()
         {
             eventsRepository.Items.First().Planner = usersRepository.Items.First();
-            //eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
+            eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
             eventsRepository.Items.Last().Planner = usersRepository.Items.First();
-            //eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+            eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+
+            foreach (var ev in eventsRepository.Items)
+            { ev.Rating = new Rating(); }
+            eventsRepository.Items.First().Rating.Value = 17;
+            eventsRepository.Items.Last().Rating.Value = 17;
+
+            foreach (var user in usersRepository.Items)
+            { user.Rating = new Rating(); }
             usersRepository.Items.First().Rating.Value = 12;
             usersRepository.Items.Last().Rating.Value = 3;
         }
-        
+
         public List<Event> GetActiveEventsForUserAsPlanner(User user)
         {
             //если мероприятия от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
-            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > now).ToList() ?? nullEventList;
+            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > now).ToList() ?? emptyEventList;
+        }
+        public List<Event> GetPastEventsForUserAsPlanner(User user)
+        {
+            return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt < now).ToList() ?? emptyEventList;
         }
 
         // устанавливаем границы для длительности мероприятия
@@ -117,20 +131,21 @@ namespace VoluntArea
                 EventDt = eventDt,
                 Description = description,
                 DurationHours = duration,
-                RequiredPeopleNumber = peopleNumber
+                RequiredPeopleNumber = peopleNumber,
+                Rating = new Rating()
             };
             if(newEvent.IsValid())
             {
                 newEvent.EventId = eventsRepository.Items.Max(e => e.EventId) + 1;
                 eventsRepository.Add(newEvent);
-                activeEvents.Add(newEvent);
+                GetActiveEvents();
                 return true;
             }
             return false;
         }
         public void ChangeRatingForUsers()
         {
-            List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList() ?? nullEventList;
+            List<Event> newPastEvents = eventsRepository.Items.Except(activeEvents).ToList() ?? emptyEventList;
 
             foreach (var pastEvent in newPastEvents.Where(e => e.Volunteers != null))
             {

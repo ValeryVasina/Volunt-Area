@@ -28,8 +28,8 @@ namespace VoluntArea.Storage
             if (!File.Exists(GetPath("Data3/Events.json")))
                 using (var sw = new StreamWriter(GetPath("Data3/Events.json")))
                 {
-                    sw.Write(@"[{""EventId"":1,""EventName"":""Открытие приюта 'Лучший друг'"",""EventDt"":""2020/01/17 20:00:00"",""EventType"":4,""DurationHours"":3,""Town"":""Москва"",""Address"":""ул.Петрова д.5"",""RequiredPeopleNumber"":7,""Description"":""Ищем добрых людей""},
-{""EventId"":2,""EventName"":""Форум для врачей-кардиологов"",""EventDt"":""2020/01/23 17:00:00"",""DurationHours"":4,""EventType"":5,""Town"":""Москва"",""Address"":""ул.Лизюкова д.31"",""RequiredPeopleNumber"":10,""Description"":""Вкусно покормим""}]");
+                    sw.Write(@"[{""EventId"":1,""EventName"":""Открытие приюта 'Лучший друг'"",""EventDt"":""2020/01/17 20:00:00"",""DurationHours"":3,""Town"":""Москва"",""Address"":""ул.Петрова д.5"",""RequiredPeopleNumber"":7,""Description"":""Ищем добрых людей""},
+{""EventId"":2,""EventName"":""Форум для врачей-кардиологов"",""EventDt"":""2020/01/23 17:00:00"",""DurationHours"":4,""Town"":""Москва"",""Address"":""ул.Лизюкова д.31"",""RequiredPeopleNumber"":10,""Description"":""Вкусно покормим""}]");
                 }
             
         }
