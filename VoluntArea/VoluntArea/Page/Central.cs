@@ -66,7 +66,19 @@ namespace VoluntArea
         private void MainMenu()
         {
             ClearWorkPlace();
-           
+
+            WorkPlace.Children.Add(new Image
+            {
+                Source = "main.jpg"
+            });
+            WorkPlace.Children.Add(new Label
+            {
+                BackgroundColor = StyleColor.color3,
+                FontSize = 22,
+                Text = "Чувствуй сердцем Думай головой. Стань волонтером, Все страхи долой!"
+            });
+            WorkPlace.Children.Add(CreateTiteForPage("Ближайшие мероприятия", 35));
+
             foreach (Event ev in manager.activeEvents)
                WorkPlace.Children.Add(FormForEvent(ev));
         }
@@ -108,7 +120,7 @@ namespace VoluntArea
             Button but = new Button
             {
                 Text = "M",
-                BackgroundColor = StyleColor.color2
+                BackgroundColor = StyleColor.color1
             };
 
             but.Clicked += ClickMenuButton;
