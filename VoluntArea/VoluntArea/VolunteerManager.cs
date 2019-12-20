@@ -19,7 +19,7 @@ namespace VoluntArea
 
         public VolunteerManager()
         {
-            AddPlannerToExistingEvents();
+            MethodForDemo();
             GetActiveEvents();
             ChangeRatingForUsers();
         }
@@ -73,28 +73,41 @@ namespace VoluntArea
         }
         public bool CheckPassword(string password1, string password2){return password1!=null ? password1 == password2: false;}
 
-        // тестовый метод для добавления организаторов мероприятиям 
-        public void AddPlannerToExistingEvents()
+        // тестовый метод для демо версии
+        public void MethodForDemo()
         {
             eventsRepository.Items.First().Planner = usersRepository.Items.First();
-            eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
+            eventsRepository.Items.First(e => e.EventId == 2).Planner = usersRepository.Items.First(u => u.UserId == 3);
+            eventsRepository.Items.First(e => e.EventId == 3).Planner = usersRepository.Items.First(u => u.UserId == 3);
             eventsRepository.Items.Last().Planner = usersRepository.Items.First();
-            eventsRepository.Items.Last().Type = EventType.Форумы_встречи_конференции;
+
+            eventsRepository.Items.First().Type = EventType.Приюты_для_животных;
+            eventsRepository.Items.First(e => e.EventId == 2).Type = EventType.Форумы_встречи_конференции;
+            eventsRepository.Items.First(e => e.EventId == 3).Type = EventType.Праздник;
+            eventsRepository.Items.First(e => e.EventId == 4).Type = EventType.Субботник;
 
             foreach (var ev in eventsRepository.Items)
             { ev.Rating = new Rating(); }
             eventsRepository.Items.First().Rating.Value = 17;
-            eventsRepository.Items.Last().Rating.Value = 17;
+            eventsRepository.Items.First(e => e.EventId == 2).Rating.Value = 10;
+            eventsRepository.Items.First(e => e.EventId == 3).Rating.Value = 7;
+            eventsRepository.Items.First(e => e.EventId == 4).Rating.Value = 9;
 
             foreach (var user in usersRepository.Items)
             { user.Rating = new Rating(); }
             usersRepository.Items.First().Rating.Value = 12;
-            usersRepository.Items.Last().Rating.Value = 3;
+            usersRepository.Items.First(u => u.UserId == 2).Rating.Value = 3;
+            usersRepository.Items.First(u => u.UserId == 3).Rating.Value = 19;
+
+            foreach (var ev in eventsRepository.Items)
+            { ev.Volunteers = new List<User>(); }
+            eventsRepository.Items.Last().Volunteers.Add(usersRepository.Items.Last());
+            eventsRepository.Items.First().Volunteers.Add(usersRepository.Items.First(u => u.UserId == 2));
         }
 
         public List<Event> GetActiveEventsForUserAsPlanner(User user)
         {
-            //если мероприятия от конкретного чувака не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
+            //если мероприятия от конкретного юзера не окажется у нас будет эксепшн, поэтому создаем пустой лист, чтобы его не было
             return eventsRepository.Items.Where(e => e.Planner == user && e.EventDt > DateTime.Now).ToList() ?? emptyEventList;
         }
         public List<Event> GetPastEventsForUserAsPlanner(User user)

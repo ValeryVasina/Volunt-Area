@@ -10,15 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Events.json" />
-    <None Remove="Data\Users.json" />
+    <None Remove="AppData\Events.json" />
+    <None Remove="AppData\Users.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Data\Events.json">
+    <EmbeddedResource Include="AppData\Events.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Users.json">
+    <EmbeddedResource Include="AppData\Users.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

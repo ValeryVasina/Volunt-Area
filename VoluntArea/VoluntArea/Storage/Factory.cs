@@ -16,10 +16,8 @@ namespace VoluntArea
         private Factory() { }
         public static Factory Instance => instance ?? (instance = new Factory());
 
-        
-
-        private const string eventFile = "Data3/Events.json";
-        private const string userFile = "Data3/Users.json";
+        private const string eventFile = "AppData/Events.json";
+        private const string userFile = "AppData/Users.json";
 
         // считываем данные с json файлов в списки
         private IRepository<Event> eventsRepository = new FileRepository<Event>(eventFile);
