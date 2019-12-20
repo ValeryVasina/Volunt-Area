@@ -152,6 +152,17 @@ namespace VoluntArea
                 pastEvent.Volunteers.ForEach(v => v.Rating.Value += pastEvent.DurationHours);
             }
         }
+
+        public bool AddUserToEvent(User user, Event activeEvent)
+        {
+            if (activeEvent.Volunteers.Count < activeEvent.RequiredPeopleNumber && !activeEvent.Volunteers.Contains(user))
+            {
+                activeEvent.Volunteers.Add(user);
+                return true;
+            }
+            return false;
+        }
+
         //вытаскиваем текущие ивенты для юзера, которые он собирается посетить
         public List<Event> GetActiveEventsForUserToAttend(User user)
         {
@@ -162,5 +173,6 @@ namespace VoluntArea
         {
             return eventsRepository.Items.Where(e => e.Volunteers.Contains(user) && e.EventDt < DateTime.Now).ToList() ?? emptyEventList;
         }
+
     }
 }
